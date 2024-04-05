@@ -8,7 +8,8 @@ const token = process.env.TELEGRAM_BOT_ANKY_BOT;
 const bot = new TelegramBot(token, { polling: true });
 
 bot.on("message", async (msg) => {
-  if (msg.text.length > 320) {
+  if (!msg?.text) return;
+  if (msg?.text?.length > 320) {
     return bot.sendMessage(
       msg.chat.id,
       "that is too much text. please send me less than 320 characters"
