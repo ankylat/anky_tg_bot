@@ -26,6 +26,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 // messages.
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
+  console.log("in here", msg);
   if (!msg?.text) return;
   if (msg?.text?.length > 320) {
     return bot.sendMessage(
@@ -35,7 +36,7 @@ bot.on("message", async (msg) => {
   }
   const replyFromAnky = await askAnky(msg.text);
   if (replyFromAnky.success) {
-    return bot.sendMessage(msg.chat.id, replyFromAnky);
+    return bot.sendMessage(msg.chat.id, replyFromAnky.ankyReply);
   } else {
     return bot.sendMessage(msg.chat.id, "sorry, there was an error");
   }
